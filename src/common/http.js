@@ -1,21 +1,40 @@
 // @ts-check
 
-import axios from "axios";
-
 /**
- * Send GraphQL request to GitHub API.
+ * Send GraphQL request to GitHub API (Cloudflare Workers compatible).
  *
- * @param {import('axios').AxiosRequestConfig['data']} data Request data.
- * @param {import('axios').AxiosRequestConfig['headers']} headers Request headers.
- * @returns {Promise<any>} Request response.
+ * @param {any} data Request data.
+ * @param {Record<string, string>} headers Request headers.
+ * @returns {Promise<{ data: any }>} Axios-compatible response shape.
  */
-const request = (data, headers) => {
-  return axios({
-    url: "https://api.github.com/graphql",
-    method: "post",
-    headers,
-    data,
+const request = async (data, headers = {}) => {
+  const res = await fetch("https://api.github.com/graphql", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "User-Agent": "github-readme-stats",
+      ...headers,
+    },
+    body: JSON.stringify(data),
   });
+
+  const text = await res.text();
+
+  if (!res.ok) {
+    console.log("GitHub GraphQL HTTP error:", res.status, text.slice(0, 500));
+    throw new Error(`GitHub GraphQL HTTP ${res.status}`);
+  }
+
+  let json;
+  try {
+    json = JSON.parse(text);
+  } catch {
+    console.log("GitHub GraphQL non-JSON response:", text.slice(0, 500));
+    throw new Error("GitHub GraphQL returned invalid JSON");
+  }
+
+  // IMPORTANT: keep axios-compatible shape
+  return { data: json };
 };
 
 export { request };
