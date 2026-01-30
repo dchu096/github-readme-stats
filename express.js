@@ -1,10 +1,15 @@
-import "dotenv/config";
 import statsCard from "./api/index.js";
 import repoCard from "./api/pin.js";
 import langCard from "./api/top-langs.js";
 import wakatimeCard from "./api/wakatime.js";
 import gistCard from "./api/gist.js";
+
 import express from "express";
+import { httpServerHandler } from "cloudflare:node";
+
+// dotenv is for local Node servers; Workers uses Wrangler "vars" instead.
+// Remove this unless you REALLY need it locally.
+// import "dotenv/config";
 
 const app = express();
 const router = express.Router();
@@ -17,7 +22,10 @@ router.get("/gist", gistCard);
 
 app.use("/api", router);
 
-const port = process.env.PORT || process.env.port || 9000;
-app.listen(port, "0.0.0.0", () => {
-  console.log(`Server running on port ${port}`);
-});
+// Cloudflare's Node HTTP bridge expects you to "listen" on a port
+// and then export the handler for that port.
+const port = 3000;
+app.listen(port);
+
+// ✅ This default export is what makes it a Module Worker (fixes your earlier “Service Worker format” error)
+export default httpServerHandler({ port });
