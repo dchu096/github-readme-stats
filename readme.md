@@ -17,7 +17,7 @@ I prefer using Cloudflare over Vercel, so this fork adapts GitHub Readme Stats t
 
 ## 🙏 Attribution
 
-This project is based on and inspired by  
+This project is based on 
 **GitHub Readme Stats** by [Anurag Hazra](https://github.com/anuraghazra).
 
 Original repository:  
