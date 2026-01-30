@@ -20,15 +20,6 @@ router.get("/top-langs", langCard);
 router.get("/wakatime", wakatimeCard);
 router.get("/gist", gistCard);
 
-app.get("/debug", (req, res) => {
-  res.json({
-    pat_present: Boolean(process.env.PAT_1),
-    pat_len: process.env.PAT_1 ? process.env.PAT_1.length : 0,
-    env_keys_sample: Object.keys(process.env).filter(k => k.includes("PAT") || k.includes("GITHUB")),
-  });
-});
-
-
 app.use("/api", router);
 
 // Cloudflare's Node HTTP bridge expects you to "listen" on a port
