@@ -11,6 +11,10 @@
 
 </p>
 
+# Why this fork?
+
+I prefer using Cloudflare over Vercel, so this fork adapts GitHub Readme Stats to run on Cloudflare Workers
+
 ## 🙏 Attribution
 
 This project is based on and inspired by  
@@ -20,10 +24,6 @@ Original repository:
 https://github.com/anuraghazra/github-readme-stats
 
 <p align="center">Love the project? Please consider <a href="https://www.paypal.me/anuraghazra">donating</a> to the original author to help it improve!</p>
-
-# Why this fork?
-
-I prefer using Cloudflare over Vercel, so this fork adapts GitHub Readme Stats to run on Cloudflare Workers
 
 
 ## ❗Important Notices
