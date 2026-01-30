@@ -27,5 +27,16 @@ app.use("/api", router);
 const port = 3000;
 app.listen(port);
 
-// ✅ This default export is what makes it a Module Worker (fixes your earlier “Service Worker format” error)
-export default httpServerHandler({ port });
+// Create the handler once
+const handler = httpServerHandler({ port });
+
+// Export a single default that injects env -> process.env, then delegates
+export default {
+  async fetch(request, env, ctx) {
+    // Make Wrangler vars/secrets accessible to code expecting process.env.*
+    globalThis.process ??= { env: {} };
+    Object.assign(globalThis.process.env, env);
+
+    return handler.fetch(request, env, ctx);
+  },
+};
