@@ -11,9 +11,15 @@
 
 </p>
 
+## 🙏 Attribution
 
+This project is based on and inspired by  
+**GitHub Readme Stats** by [Anurag Hazra](https://github.com/anuraghazra).
 
-<p align="center">Love the project? Please consider <a href="https://www.paypal.me/anuraghazra">donating</a> to help it improve!</p>
+Original repository:  
+https://github.com/anuraghazra/github-readme-stats
+
+<p align="center">Love the project? Please consider <a href="https://www.paypal.me/anuraghazra">donating</a> to the original author to help it improve!</p>
 
 # Why this fork?
 
