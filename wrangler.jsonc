@@ -3,8 +3,14 @@
  * https://developers.cloudflare.com/workers/wrangler/configuration/
  */
 {
-	"name": "github-readme-stats",
-	"main": "express.js",
-	"compatibility_date": "2026-01-28",
-	"compatibility_flags": ["nodejs_compat"]
+  "name": "github-readme-stats",
+  "main": "express.js",
+  "compatibility_date": "2026-01-28",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true
+    }
+  }
 }
